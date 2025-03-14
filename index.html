@@ -1,59 +1,10 @@
-<!-- 
-The A11Y Project är ett community-drivet initiativ som strävar efter att göra digital tillgänglighet enklare, 
-mer begriplig och lättare att implementera för alla.
-
-Läs lite om projektet:
-https://www.a11yproject.com/about/
-
-
-Tillgänglighet är en viktig del av webbutveckling. Det handlar om att göra webbplatser och appar tillgängliga för alla, inklusive personer med funktionsnedsättningar. 
-Det finns många sätt att göra en webbplats mer tillgänglig, till exempel att använda semantisk HTML, skapa enkel navigering och använda alternativa texter för bilder.
- ____________________________________________________________________________________________________
- 1. Läs noga genom koden och identifiera alla tillgänglighetsproblem.
- [x]
- 
- 2. Testa kör lighthouse i devtools(Google chrome) och se vilka problem som finns.
- SVAR: 
- -Performance 45
- -Accessibility 83
- -Best Practices 52
- -SEO 82
-
- 3. Skriv en kort sammanfattning av vad som är fel och hur det kan åtgärdas.
- Sammanfattning: 
- -Javascripten är onödigt trög att köra och skulle kunna städas och minifieras.
- -Länkar leder till att nya sidor öppnas istället för att cachas så att man snabbt kan gå framåt och bakåt. 
- -Huvudinnehållet tar för lång tid att ladda pga tröga bildformat (PNG/JPG). Webp och VIF är moderna format. 
- -CSS:en skulle man kunna städa upp och minifiera så att den inte tar lika mycket utrymme och kapacitet.
- -Animerat innehåll stjäl prestanda och stora GIF:s är okloka att avända som animerat innehåll. 
- -För animerat innehåll och videos är det bättre att använda MPEG4/WebM. 
- -Bilder saknar alt text
-
- -Statiskt innehåll kan cachas för att uppladdning ska kunna gå snabbare vid ett återbesök, så jag skulle vilja lagra dem lokalt med en _headers-fil.
- Källa: https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl/?utm_source=lighthouse&utm_medium=devtools
-
-
- 4. Skriv om koden så att den följer tillgänglighetsstandarder.
- []
-
- 5. Skriv en kort sammanfattning av vad du har ändrat och varför.
- []
-
- 6. Testa din nya kod med andra verktyg för tillgänglighet.
- []
-
- 7. Skriv en kort reflektion över hur det var att göra uppgiften. Vad var svårt? Vad lärde du dig?
- []
- ____________________________________________________________________________________________________
-
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A11y News</title> <!--Webbläsaren läser html uppifrån och ned. vi vill se titeln direkt!-->
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
     
 </head>
@@ -71,13 +22,14 @@ Det finns många sätt att göra en webbplats mer tillgänglig, till exempel att
             <li><a href="#entertainment">Entertainment</a></li>
         </ul>
     </nav>
+    <button class="dark-mode-toggle">Slå på/av Mörker Läge</button>
 
     <!--Byte av div till form, där vi gör en get request där datan skickas till /search som URL parameter-->
     <form class="input-container" action="/search" method="get">
         <label for="search">Search:</label> <!--Användare som behöver skärmläsaren får information om vad fältet är till för-->
         <input type="text" id="search" name="q" placeholder="Enter search term">
         <button type="submit">Search</button> <!--Semantiskt korrekt knapp som möjliggör sökning med enterknappen-->
-    </div>
+    </form>
     
     <div class="container">
         <div class="article">
@@ -91,9 +43,9 @@ Det finns många sätt att göra en webbplats mer tillgänglig, till exempel att
         <div class="article">
             <h2>Lunar New Year: Celebrate with us!</h2>
             <div class="image-container">
-                <img src="images/ocean.webp" alt="An ocean view with blue water waves" loading="lazy">
-                <img src="images/city.webp" alt="A city skyline with tall buildings" loading="lazy">
-                <img src="images/family.webp" alt="A family celebrating Lunar New Year together" loading="lazy">
+                <img src="images/ocean.webp" alt="An ocean view with blue water waves">
+                <img src="images/city.webp" alt="A city skyline with tall buildings">
+                <img src="images/family.webp" alt="A family celebrating Lunar New Year together">
             </div>
         </div>
 
@@ -106,22 +58,4 @@ Det finns många sätt att göra en webbplats mer tillgänglig, till exempel att
         </div>
         <div id="search-results" aria-live="polite"></div> <!--Aria live= polite är för att skärmläsare ska läsa upp resultatet-->
     </div>
-
-    <script>
-
-        //Lite JS funktionalitet för att testa sökningen
-        function displaySearchResults() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const query = urlParams.get('q');
-            if (query) {
-                document.querySelector('#search-results').innerHTML = `<p>Search results for: <strong>${query}</strong></p>`;
-            }
-        }
-
-        //körs automatiskt när sidan laddas
-        document.addEventListener("DOMContentLoaded", displaySearchResults);
-
-    </script>
 </body>
-
-</html>

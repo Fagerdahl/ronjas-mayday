@@ -1,214 +1,186 @@
-/* Återställer standardmarginaler/padding och använder border-box för att inkludera padding i elementets storlek */
+/* Byter till en mer Lättsmält font!*/
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; /* Tungläst typsnitt (JA VERKLIGEN! )*/
+  font-family: Arial, sans-serif;
 }
 
-/* Ställer in bakgrundsfärg, textfärg och textstil för hela sidan 
-(kontraster är godkända för AA tillgänglighet men inte för WCAG AAA! 
-Källa: https://webaim.org/resources/contrastchecker/) */
 body {
-  background: #6c6c6c;
-  color: #f5f5dc;
-  font-size: 30px; /*Vansinnigt stora typsnitt och långa avstånd mellan allt i bodyn ger en dålig UX*/
-  text-align: left;
-  letter-spacing: 5px;
-  word-spacing: 15px;
-  line-height: 1.2em;
-  text-shadow: 5px 5px 10px black;
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-/* Tar bort understrykning på länkar och ändrar färg (Svårt att veta vad som är klickbart, följer inte konventioner 
-och kan bli problematiskt när ingen indikation ges på navigering med tangentbord)*/
 a {
-  color: #f5f5dc;
+  color: #2e2ed2;
   text-decoration: none;
 }
 
-/* Stilar för en knapp-liknande div, men "not-allowed" cursor gör att den ser inaktiv ut (Man förstår inte att den är klickbar. 
-Dålig UX och jag saknar en pointer) */
-.button {
-  background-color: magenta;
-  color: cyan;
-  font-size: 50px;
-  padding: 20px;
-  border: 5px dashed black;
-  cursor: not-allowed;
-  text-transform: uppercase;
+/* Skip to content - dolt då funktionen är viktigare än synligheten*/
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 10px;
+  background: #0073e6;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 100;
 }
 
-/* Nästan osynlig text, spegelvänd (Kan missas av skärmläsare och spegelvänd text är dessutom inte bra för personer med svårigheter)*/
-.hidden-text {
-  display: block;
-  opacity: 0.1;
-  font-size: 50px;
-  transform: rotate(180deg);
+.skip-link:focus {
+  left: 10px;
 }
 
-/* En behållare med mittjusterad text och en blå transparent bakgrund */
-.container {
-  width: 100%;
-  margin: auto;
-  border: 10px solid pink;
-  background-color: rgba(0, 0, 255, 0.2);
-  text-align: center;
-}
-
-/* Artikel med prickad orange linje och en radial gradient som bakgrund */
-.article {
-  border-bottom: 10px dotted orange;
-  margin-bottom: 50px;
-  padding-bottom: 50px;
-  background: radial-gradient(circle, black, transparent);
-}
-
-/* Rubrik med stor text och mörkröd färg, justerad till höger */
-.headline {
-  font-size: 80px;
-  font-weight: lighter;
-  color: #8d0801;
-  text-align: right;
-  margin: 50px;
-  padding: 20px;
-}
-
-/* Navigeringsmeny med mörk bakgrund och jämnt fördelade element (Saknar markering av aktiv sida- HÄR ÄR DU) */
+/* En navigation med tydlig kontrast */
 .navigation {
-  background-color: #3b3b3b;
-  padding: 30px;
+  background: #004080;
+  padding: 15px;
+}
+
+.navigation ul {
   display: flex;
-  justify-content: space-between;
-  font-size: 40px;
+  list-style: none;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navigation a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: background 0.3s;
+}
+
+/* En "Här är du" med border radius */
+.navigation a:hover,
+.navigation a:focus {
+  background: #0066cc;
+  border-radius: 5px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+.input-container label {
+  display: none;
+}
+
+.input-container input {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-container button {
+  padding: 10px 15px;
+  margin-left: 0.2rem;
+  border: none;
+  background: #0073e6;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.input-container button:hover {
+  background: #005bb5;
+}
+
+.article {
+  background: white;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 800px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.article h2 {
+  color: #004080;
+}
+
+.div .article a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #0073e6;
+  text-decoration: none;
   font-weight: bold;
 }
 
-/* Navigeringslänkar (saknar markering på aktiv länk) */
-.navigation .nav-item a {
-  color: #ffffff;
-  padding: 10px;
-  text-decoration: none;
+.article a:hover {
+  text-decoration: underline;
 }
 
-/* Bakgrundsfärg vid hover på navigationslänkar */
-.navigation .nav-item:hover a {
-  background-color: #acacac40;
-}
-
-/* Bilderna placeras i en rad, centrerar dem horisontellt och vertikalt och lägger till ett mellanrum mellan bilderna */
 .image-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Definierar storleken på bilderna och gör att de täcker det angivna utrymmet utan att bli förvrängda  */
-.image-container img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-}
-
-/* Input-fält i en container med kolumnlayout och flytande positionering (Otydligt och rörigt med inputfält och sök-knapp kors och tvärs i en container) */
-.input-container {
-  display: flex;
-  flex-direction: column;
-  float: right;
-  width: 50%;
-  background: #ffffff00; /* Genomskinlig bakgrund */
-}
-
-/* Inputfält med röd text och svart ram (Rörig och funkar ej. upp och ned text, osynlig) */
-.input-container input {
-  font-size: 30px;
-  padding: 20px;
-  text-align: right;
-  border: 5px solid black;
-  background-color: rgb(255, 255, 255);
-  color: red;
-}
-
-/* Knapp med rosa kant, mörkröd bakgrund och roterad (Otydligt att det är en knapp öht) */
-.input-container button {
-  border: 10px ridge pink;
-  background-color: darkred;
-  color: white;
-  font-size: 40px;
-  padding: 30px;
-  cursor: crosshair;
-  transform: rotate(-10deg);
-}
-
-/* En knapp med blå bakgrund och vit text (Det finaste på sidan kan jag tycka, men man borde avstå från att trycka på såna på en sånhär sida)*/
-.button {
-  display: inline-block;
-  padding: 10px;
-  background-color: blue;
-  color: white;
-  cursor: pointer;
-}
-
-/* En "fake ad" med blinkande bakgrund och fast position längst ner (En typisk sån ad som min Morfar trycker på. Den är irriterande och
-känns som en fluga på skärmen. Blinkar och stressar, går ej att klicka bort )*/
-#fake-ad {
-  position: fixed;
-  bottom: 0;
-  width: 40%;
-  background: repeating-radial-gradient(circle, cyan, magenta 10%, yellow 20%);
-  text-align: center;
-  padding: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Sektion med centrerad layout (Fake ad sektionen) */
-.top-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Text med en hover-effekt som drastiskt krymper storleken */
-.btext {
-  font-size: 18px;
-  padding: 10px 15px;
+  gap: 15px;
   margin-top: 10px;
-  font-weight: bold;
-  transition: transform 0.5s ease-in-out, font-size 0.5s ease-in-out,
-    padding 0.5s ease-in-out;
 }
 
-/* På hover minskas texten kraftigt, nästan osynlig (Nej, men sluta. om jag inte kan klicka ner det så vill jag åtminstone ha mina pengar!) */
-.btext:hover {
-  transform: scale(0.1);
-  font-size: 1px;
-  padding: 1px;
-}
-
-/* Bild som roterar mellan -45 och 45 grader (Alldeles för stort gradantal för animationen. Det ställer inte bara till det med illamående
-för mig utan även för personer med balansstörningar. Vi vill reducera rörelsen till kanske 10 grader, göra den långsam eller åtminstone ge möjlighet att stänga av den.
-Källa: https://www.w3.org/WAI/WCAG22/Techniques/css/C39
-https://saavutettavuusvaatimukset.fi/sv/kraven-i-lagen-om-digitala-tjanster/wcag-21-kraven-i-lagen?toggle=1.4.8%20Visuell%20presentation%20AAA&toggle=1.4.13%20Popup-funktioner%20dks%20kunns%20hanteras%20och%20st%C3%A4ngas%20av%20all%20%28inofficiel%20%C3%B6vers%C3%A4ttning%29%20%20AA*/
-.rotating-image {
+.image-container img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  animation: rotateLeftRight 2s infinite alternate ease-in-out;
+  max-width: 250px;
+  border-radius: 5px;
 }
 
-/* Nyckelbildning för att rotera bilden åt vänster och höger (minska! Eller ta bort hela denna hemska ad)*/
-@keyframes rotateLeftRight {
-  0% {
-    transform: rotate(-45deg);
+/* En stor och tydlig, tillgänglig video som kändes trevlig på denna sida */
+.article-video {
+  background: white;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 800px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.article-video a {
+  color: blue;
+}
+
+.article-video video {
+  width: 100%;
+  border-radius: 5px;
+}
+
+/* Sökresultat */
+#search-results {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Användarvänligt på mindre skärmar, navigationen staplas vertikalt bland annat. 
+Tydligen är 768 px en etablerad standard brytpunkt från desktop -> mobil 
+Källa: https://jens-andreasson.gitbook.io/webbutveckling/design/responsiv-design*/
+@media (max-width: 768px) {
+  .navigation ul {
+    flex-direction: column;
+    align-items: center;
   }
-  100% {
-    transform: rotate(45deg);
+
+  .input-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .input-container input {
+    width: 90%;
+  }
+
+  .input-container button {
+    width: 90%;
+    margin-top: 10px;
   }
 }

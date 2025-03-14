@@ -10,24 +10,49 @@ Tillgänglighet är en viktig del av webbutveckling. Det handlar om att göra we
 Det finns många sätt att göra en webbplats mer tillgänglig, till exempel att använda semantisk HTML, skapa enkel navigering och använda alternativa texter för bilder.
  ____________________________________________________________________________________________________
  1. Läs noga genom koden och identifiera alla tillgänglighetsproblem.
+ [x]
  
  2. Testa kör lighthouse i devtools(Google chrome) och se vilka problem som finns.
+ SVAR: 
+ -Performance 45
+ -Accessibility 83
+ -Best Practices 52
+ -SEO 82
 
  3. Skriv en kort sammanfattning av vad som är fel och hur det kan åtgärdas.
+ Sammanfattning: 
+ -Javascripten är onödigt trög att köra och skulle kunna städas och minifieras.
+ -Länkar leder till att nya sidor öppnas istället för att cachas så att man snabbt kan gå framåt och bakåt. 
+ -Huvudinnehållet tar för lång tid att ladda pga tröga bildformat (PNG/JPG). Webp och VIF är moderna format. 
+ -CSS:en skulle man kunna städa upp och minifiera så att den inte tar lika mycket utrymme och kapacitet.
+ -Animerat innehåll stjäl prestanda och stora GIF:s är okloka att avända som animerat innehåll. 
+ -För animerat innehåll och videos är det bättre att använda MPEG4/WebM. 
+ -Bilder saknar alt text
+
+ -Statiskt innehåll kan cachas för att uppladdning ska kunna gå snabbare vid ett återbesök, så jag skulle vilja lagra dem lokalt med en _headers-fil.
+ Källa: https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl/?utm_source=lighthouse&utm_medium=devtools
+
 
  4. Skriv om koden så att den följer tillgänglighetsstandarder.
+ []
 
  5. Skriv en kort sammanfattning av vad du har ändrat och varför.
+ []
 
  6. Testa din nya kod med andra verktyg för tillgänglighet.
+ []
 
  7. Skriv en kort reflektion över hur det var att göra uppgiften. Vad var svårt? Vad lärde du dig?
+ []
  ____________________________________________________________________________________________________
 
 -->
 
 <!DOCTYPE html>
-<!-- Vad händer när man kommenterar bort språket? -->
+<!-- Vad händer när man kommenterar bort språket? 
+ SVAR: De tekniska stöden för anpassning drabbas negativt, då de behöver veta vilket språk webbsidan använder sig av för att fungera optimalt. 
+ källa: https://www.w3.org/International/questions/qa-lang-why.sv.html 
+-->
 <!-- <html lang="en"> -->
 
 <head>
@@ -77,7 +102,8 @@ Det finns många sätt att göra en webbplats mer tillgänglig, till exempel att
         <div class="article" onclick="alert('This does nothing!')">
             <div>Lunar New Year: Celebrate with us!</div>
 
-            <!-- Bilder visas inte, varför? -->
+            <!-- Bilder visas inte, varför? 
+             Svar: sluttagg saknas-->
             <div class="image-container">
                 <img src="/images/ocean.jpg">
                 <img src="/images/city.jpg">

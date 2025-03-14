@@ -3,14 +3,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; /* Tungläst typsnitt */
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; /* Tungläst typsnitt (JA VERKLIGEN! )*/
 }
 
-/* Ställer in bakgrundsfärg, textfärg och textstil för hela sidan */
+/* Ställer in bakgrundsfärg, textfärg och textstil för hela sidan 
+(kontraster är godkända för AA tillgänglighet men inte för WCAG AAA! 
+Källa: https://webaim.org/resources/contrastchecker/) */
 body {
   background: #6c6c6c;
   color: #f5f5dc;
-  font-size: 30px;
+  font-size: 30px; /*Vansinnigt stora typsnitt och långa avstånd mellan allt i bodyn ger en dålig UX*/
   text-align: left;
   letter-spacing: 5px;
   word-spacing: 15px;
@@ -18,13 +20,15 @@ body {
   text-shadow: 5px 5px 10px black;
 }
 
-/* Tar bort understrykning på länkar och ändrar färg */
+/* Tar bort understrykning på länkar och ändrar färg (Svårt att veta vad som är klickbart, följer inte konventioner 
+och kan bli problematiskt när ingen indikation ges på navigering med tangentbord)*/
 a {
   color: #f5f5dc;
   text-decoration: none;
 }
 
-/* Stilar för en knapp-liknande div, men "not-allowed" cursor gör att den ser inaktiv ut */
+/* Stilar för en knapp-liknande div, men "not-allowed" cursor gör att den ser inaktiv ut (Man förstår inte att den är klickbar. 
+Dålig UX och jag saknar en pointer) */
 .button {
   background-color: magenta;
   color: cyan;
@@ -35,7 +39,7 @@ a {
   text-transform: uppercase;
 }
 
-/* Nästan osynlig text, spegelvänd */
+/* Nästan osynlig text, spegelvänd (Kan missas av skärmläsare och spegelvänd text är dessutom inte bra för personer med svårigheter)*/
 .hidden-text {
   display: block;
   opacity: 0.1;
@@ -70,7 +74,7 @@ a {
   padding: 20px;
 }
 
-/* Navigeringsmeny med mörk bakgrund och jämnt fördelade element */
+/* Navigeringsmeny med mörk bakgrund och jämnt fördelade element (Saknar markering av aktiv sida- HÄR ÄR DU) */
 .navigation {
   background-color: #3b3b3b;
   padding: 30px;
@@ -80,7 +84,7 @@ a {
   font-weight: bold;
 }
 
-/* Navigeringslänkar */
+/* Navigeringslänkar (saknar markering på aktiv länk) */
 .navigation .nav-item a {
   color: #ffffff;
   padding: 10px;
@@ -107,7 +111,7 @@ a {
   object-fit: cover;
 }
 
-/* Input-fält i en container med kolumnlayout och flytande positionering */
+/* Input-fält i en container med kolumnlayout och flytande positionering (Otydligt och rörigt med inputfält och sök-knapp kors och tvärs i en container) */
 .input-container {
   display: flex;
   flex-direction: column;
@@ -116,7 +120,7 @@ a {
   background: #ffffff00; /* Genomskinlig bakgrund */
 }
 
-/* Inputfält med röd text och svart ram */
+/* Inputfält med röd text och svart ram (Rörig och funkar ej. upp och ned text, osynlig) */
 .input-container input {
   font-size: 30px;
   padding: 20px;
@@ -126,7 +130,7 @@ a {
   color: red;
 }
 
-/* Knapp med rosa kant, mörkröd bakgrund och roterad */
+/* Knapp med rosa kant, mörkröd bakgrund och roterad (Otydligt att det är en knapp öht) */
 .input-container button {
   border: 10px ridge pink;
   background-color: darkred;
@@ -137,7 +141,7 @@ a {
   transform: rotate(-10deg);
 }
 
-/* En knapp med blå bakgrund och vit text */
+/* En knapp med blå bakgrund och vit text (Det finaste på sidan kan jag tycka, men man borde avstå från att trycka på såna på en sånhär sida)*/
 .button {
   display: inline-block;
   padding: 10px;
@@ -146,7 +150,8 @@ a {
   cursor: pointer;
 }
 
-/* En "fake ad" med blinkande bakgrund och fast position längst ner */
+/* En "fake ad" med blinkande bakgrund och fast position längst ner (En typisk sån ad som min Morfar trycker på. Den är irriterande och
+känns som en fluga på skärmen. Blinkar och stressar, går ej att klicka bort )*/
 #fake-ad {
   position: fixed;
   bottom: 0;
@@ -163,7 +168,7 @@ a {
   gap: 10px;
 }
 
-/* Sektion med centrerad layout */
+/* Sektion med centrerad layout (Fake ad sektionen) */
 .top-section {
   display: flex;
   align-items: center;
@@ -180,14 +185,17 @@ a {
     padding 0.5s ease-in-out;
 }
 
-/* På hover minskas texten kraftigt, nästan osynlig */
+/* På hover minskas texten kraftigt, nästan osynlig (Nej, men sluta. om jag inte kan klicka ner det så vill jag åtminstone ha mina pengar!) */
 .btext:hover {
   transform: scale(0.1);
   font-size: 1px;
   padding: 1px;
 }
 
-/* Bild som roterar mellan -45 och 45 grader */
+/* Bild som roterar mellan -45 och 45 grader (Alldeles för stort gradantal för animationen. Det ställer inte bara till det med illamående
+för mig utan även för personer med balansstörningar. Vi vill reducera rörelsen till kanske 10 grader, göra den långsam eller åtminstone ge möjlighet att stänga av den.
+Källa: https://www.w3.org/WAI/WCAG22/Techniques/css/C39
+https://saavutettavuusvaatimukset.fi/sv/kraven-i-lagen-om-digitala-tjanster/wcag-21-kraven-i-lagen?toggle=1.4.8%20Visuell%20presentation%20AAA&toggle=1.4.13%20Popup-funktioner%20dks%20kunns%20hanteras%20och%20st%C3%A4ngas%20av%20all%20%28inofficiel%20%C3%B6vers%C3%A4ttning%29%20%20AA*/
 .rotating-image {
   width: 100%;
   height: 100%;
@@ -195,7 +203,7 @@ a {
   animation: rotateLeftRight 2s infinite alternate ease-in-out;
 }
 
-/* Nyckelbildning för att rotera bilden åt vänster och höger */
+/* Nyckelbildning för att rotera bilden åt vänster och höger (minska! Eller ta bort hela denna hemska ad)*/
 @keyframes rotateLeftRight {
   0% {
     transform: rotate(-45deg);
